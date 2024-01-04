@@ -26,18 +26,6 @@ export class UsersService {
 
     }
 
-    // async login(loginUserDto:LoginUserDto): Promise<User>{
-    //     // const user = await this.userModel.findOne({ email: loginUserDto.email }).exec();
-    //     // if (!user){
-    //     //    throw new BadRequestException('Incorrect email');
-    //     // }
-    //     // if (! await bcrypt.compare(loginUserDto.password,user.password)) {
-    //     //     throw new BadRequestException('Incorrect password');
-    //     // }
-
-    //     return this.auth;
-    
-    // }
 
     async findAll(): Promise<User[]>{
         return this.userModel.find().exec();
@@ -84,6 +72,19 @@ export class UsersService {
     async findByEmail(email: string): Promise<User | null> {
         return this.userModel.findOne({ email }).exec();
       }
+
+          // async login(loginUserDto:LoginUserDto): Promise<User>{
+    //     // const user = await this.userModel.findOne({ email: loginUserDto.email }).exec();
+    //     // if (!user){
+    //     //    throw new BadRequestException('Incorrect email');
+    //     // }
+    //     // if (! await bcrypt.compare(loginUserDto.password,user.password)) {
+    //     //     throw new BadRequestException('Incorrect password');
+    //     // }
+
+    //     return this.auth;
+    
+    // } checking file
 
 
 }
