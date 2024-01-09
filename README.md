@@ -19,5 +19,7 @@ Worried about forgetting passwords? Smart Notes comes equipped with  storing per
 3) Edit and Organize:
 Smart Notes allows you to effortlessly edit and organize your notes, ensuring that your information is always up-to-date and easily accessible. Whether you need to add new details, revise existing content, or reorganize your notes, the app provides a user-friendly editing experience. 
 4) Share Notes Collaboratively:
-Collaborative work made easy! Smart Notes enables users to share notes with others, fostering teamwork and knowledge sharing. 
+Collaborative work made easy! Smart Notes enables users to share notes with others, fostering teamwork and knowledge sharing.
+
+ 
 Smart Notes represents the next evolution in note-taking applications, combining functionality, security, and collaboration to meet the diverse needs of users. With its user-friendly interface and powerful features, Smart Notes is poised to revolutionize the way you capture, manage, and share information.
