@@ -1,13 +1,13 @@
 # web-assignments
-#title
+# title
 notes app
-#group members
-1 feysel hussien ugr/5898/14
-2  mikias befekadu ugr/9340/14
-3 nahom garefo   ugr//6839/14
-4 owalabu toloessa ugr/3478/14
+# group members
+- 1 feysel hussien ugr/5898/14
+- 2  mikias befekadu ugr/9340/14
+- 3 nahom garefo   ugr//6839/14
+- 4 owalabu toloessa ugr/3478/14
 
-
+# Description
 Introducing "Smart Notes," a note-taking application built mainly with JavaScript to enhance your productivity and organization. Smart Notes goes beyond the traditional note app by incorporating a range of features  to meet the demands of students, professionals, and anyone seeking a robust and secure note-taking solution.
 Key Features:
 
