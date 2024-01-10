@@ -27,7 +27,4 @@ Smart Notes represents the next evolution in note-taking applications, combining
 Primary Functionality: **Notes**
 CRUD operations for creating, reading, updating, and deleting notes.
 
-Additional CRUD Feature: **Tags**
-CRUD operations for creating, reading, updating, and deleting tags associated with the notes.
-
 Our web application is a notes management platform that allows users to  create, organize, and edit their notes. 
