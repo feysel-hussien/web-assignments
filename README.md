@@ -4,7 +4,7 @@ notes app
 # group members
 - 1 feysel hussien ugr/5898/14
 - 2  mikias befekadu ugr/9340/14
-- 3 nahom garefo   ugr//6839/14
+- 3 nahom garefo   ugr//6739/14
 - 4 owalabu toloessa ugr/3478/14
 
 # Description
@@ -23,3 +23,11 @@ Collaborative work made easy! Smart Notes enables users to share notes with othe
 
  
 Smart Notes represents the next evolution in note-taking applications, combining functionality, security, and collaboration to meet the diverse needs of users. With its user-friendly interface and powerful features, Smart Notes is poised to revolutionize the way you capture, manage, and share information.
+
+Primary Functionality: **Notes**
+CRUD operations for creating, reading, updating, and deleting notes.
+
+Additional CRUD Feature: **Tags**
+CRUD operations for creating, reading, updating, and deleting tags associated with the notes.
+
+Our web application is a notes management platform that allows users to  create, organize, and edit their notes. 
