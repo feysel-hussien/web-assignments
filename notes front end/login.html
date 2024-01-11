@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Notes App</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="index.js"></script>
+    <style >
+        body{
+            background-image: url(images.jpg);
+            background-size: cover; 
+            background-repeat: repeat;
+        }
+        .register:hover{
+            text-decoration: none;
+        }
+
+    </style>
+    
+</head>
+<body>
+
+<div class=" login-container vh-100  d-flex align-items-center justify-content-center">
+    <div class="row justify-content-center ">
+        <div class=" ">
+            <div class="card w-100 h-100">
+                <div class="card-header bg-warning text-black">
+                    <h3 class="text-center">Login to Notes App</h3>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" class="form-control" id="username" placeholder="Enter your username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                        </div>
+                        <button type="submit"  id="loginButton" class="btn btn-warning btn-block mt-3">Login</button>
+
+                    </form>
+                    <p class="text-center text-black mt-2">Don't have an account? <a href="register.html" class="register text-info text-underline"> Signup</a>. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
