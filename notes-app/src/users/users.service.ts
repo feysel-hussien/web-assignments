@@ -1,28 +1,41 @@
 import { Injectable } from '@nestjs/common';
+import { CreateUsersDto } from './dto/create-users.dto';
+import { RolesService } from 'src/roles/roles.service';
+import { randomUUID } from 'crypto';
 
 export type User =any;
 
 @Injectable()
 export class UsersService {
-    private readonly users=[
-        {
-            userId:1,
-            username:'nahom',
-            password:'123'
-        },
-        {
-            userId:2,
-            username:'mikiyas',
-            password:'123'
-        },
-        {
-            userId:3,
-            username:'lemi',
-            password:'123'
-        },
 
-    ];
-    async findOne(username:string): Promise<User | undefined>{
-        return this.users.find(user=> user.username ===username);
+    constructor(private readonly rolesService:RolesService){}
+
+    //user data storage 
+    private users = new Map<string,any>()
+
+    async createUser(createUsersDto:CreateUsersDto){
+        const userId=randomUUID();
+
+        const user={
+            id:userId,
+            username:createUsersDto.name,
+            password:createUsersDto.password,
+            best_friend:createUsersDto.best_friend,
+        };
+        this.users.set(userId,user);
+
+        //roles 
+        const defaultRole='user';
+        this.rolesService.assignRoles(userId,[defaultRole])
+
+
+        return {id:userId,username:user.username}
+
+
     }
+
+    async findOne(id:string): Promise<User | undefined>{
+        return this.users.get(id);
+    }
+    
 }
