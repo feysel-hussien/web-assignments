@@ -8,10 +8,6 @@ import { UpdateNotesDto } from 'src/notes/dto/update-notes.dto';
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
-  // @Post()
-  // create(@Body() createAdminDto: CreateAdminDto) {
-  //   return this.adminService.create(createAdminDto);
-  // }
 
   @Get('notes')
   getAllNotes() {
@@ -21,7 +17,7 @@ export class AdminController {
 
   @Get('notes/:id')
   getNoteById(@Param('id') id: string) {
-    return this.adminService.getNoteById(id);
+    return this.adminService.getNoteById();
   }
 
 
@@ -32,11 +28,11 @@ export class AdminController {
 
   @Delete('note/:id')
   deleteNote(@Param('id') id: string) {
-    return this.adminService.deleteNote(id);
+    return this.adminService.deleteNote();
   }
 
   @Delete('user:id')
   deleteUser(@Param('id') id: string) {
-    return this.adminService.deleteUser(id);
+    return this.adminService.deleteUser();
   }
 }

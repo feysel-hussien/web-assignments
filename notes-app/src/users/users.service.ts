@@ -34,8 +34,8 @@ export class UsersService {
 
     }
 
-    async findOne(id:string): Promise<User | undefined>{
-        return this.users.get(id);
+    async getAllUsers(userId:string): Promise<User | undefined>{
+        return this.users.get(userId);
     }
     
 }

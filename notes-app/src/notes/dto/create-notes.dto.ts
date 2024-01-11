@@ -3,5 +3,4 @@ export class CreateNotesDto {
     content:string;
     notesId:Number;
     userId:Number;
-    access:[];
 }

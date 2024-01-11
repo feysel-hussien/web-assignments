@@ -1,51 +1,66 @@
-import { Injectable } from '@nestjs/common';
-import { MongoClient } from 'mongodb';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Note, NoteDocument } from './schemas/note.schema';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class NotesService {
-    private readonly uri:string;
-    private readonly dbName:string='';
-    private readonly collections:string='notes';
 
-    constructor(){
-        //Mondodb connection string
-        this.uri=''
-    }
+    constructor(@InjectModel(Note.name) private readonly noteModel: Model<NoteDocument>){}
 
-    private async getClient(){
-        const client= new MongoClient(this.uri,{ useNewUrlParser: true, useUnifiedTopology: true });
-        await client.connect();
-        return client;
-    }
+    async create(createNoteDto: any,userId:string):Promise <Note>{
 
-    async create(createNoteDto: any,userId:string){
-        const note ={
-            title:createNoteDto.title,
-            content:createNoteDto,
-            userId:userId,
-            createdAt:new Date(),
-            updatedAt:new Date(),
-        };
-
-        const client = await this.getClient();
-        const result = await client.db(this.dbName).collection(this.collectionName).insertOne(note);
-
-        client.close();
-        return result.ops[0];
+        const createdNote = new this.noteModel({...createNoteDto,userId});
+        console.log('Note created successfully')
+        return createdNote.save()
 
     }
 
-    async remove(id:string, userId:string){
-        const client = await this.getClient();
+    async remove(id:string, userId:string):Promise <Note>{
+        const deletedNote = await this.noteModel.findOneAndDelete({
+            _id:id,
+            userId
+        }).exec()
+        if (!deletedNote){
+            throw new NotFoundException('Note not found')
+        }
 
+        return deletedNote
     }
 
 
-    async findById(id:string,userId:string){
+    async findById(id:string,userId:string):Promise <Note>{
+        const note = await this.noteModel.findOne({
+            _id:id,
+            userId
+        }).exec()
+        if (!note){
+            throw new NotFoundException('Note not found');
+        }
+        return note;
 
     }
 
-    async findAll(userId:string){
-        
+    async findAll(userId:string):Promise <Note[]>{
+        return this.noteModel.find({userId}).exec();
+
+    }
+
+    async findAllNotesForAdmin():Promise <Note[]>{
+        return this.noteModel.find().exec();
+
+    }
+
+    async update(id:string,updateNoteDto:any,userId:string):Promise <Note>{
+        const updatedNote = await this.noteModel
+        .findOneAndUpdate(
+            {_id:id,userId},{$set:updateNoteDto},{new:true}
+        ).exec();
+
+        if(!updatedNote){
+            throw new NotFoundException('Note not found');
+        }
+        return updatedNote;
+
     }
 }

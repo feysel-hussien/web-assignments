@@ -10,11 +10,17 @@ export class AdminService {
 
   getAllUsers(){}
 
-  getAllNotes(){}
+  getAllNotes(){
+    return this.notesService.findAll('id');
+  }
 
-  getNoteById(){}
+  getNoteById(){
+    return this.notesService.findById()
+  }
 
-  deleteNote(){}
+  deleteNote(noteId:string){
+    return this.notesService.remove('noteId','id')
+  }
 
-  deleteUser(){}
+  deleteUser(userId:string){}
 }
