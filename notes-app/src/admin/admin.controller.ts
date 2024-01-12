@@ -26,12 +26,12 @@ export class AdminController {
     return this.adminService.getAllUsersWithNotes();
   }
 
-  // @Delete('note/:id')
-  // deleteNote(@Param('id') id: string) {
-  //   return this.adminService.deleteNote();
-  // }
+  @Delete('note/:id')
+  deleteNote(@Param('id') id: string) {
+    return this.adminService.deleteNote(id);
+  }
 
-  @Delete(':id')
+  @Delete('user/:id')
   deleteUser(@Param('id') id: string) {
     return this.adminService.deleteUserAndNotes(id);
   }

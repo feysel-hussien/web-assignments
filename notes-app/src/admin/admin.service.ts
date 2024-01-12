@@ -31,9 +31,6 @@ export class AdminService {
   }
 
 
-//   deleteNote(noteId:string){
-//     return this.notesService.remove('noteId','id')
-//   }
 
   async deleteUserAndNotes(userId:string):Promise<void>{
     const user = await this.userModel.findById(userId);
@@ -50,5 +47,13 @@ export class AdminService {
     //delete user
     await this.userModel.findByIdAndDelete(userId);
     console.log("successfully delted user and user data")
+  }
+
+   async deleteNote(noteId:string):Promise<boolean>{
+      const deletednote = await this.noteModel.findByIdAndDelete(noteId).exec();
+      if (!deletednote){
+        throw new NotFoundException("Note is not found");
+      }
+      return true;
   }
 }
