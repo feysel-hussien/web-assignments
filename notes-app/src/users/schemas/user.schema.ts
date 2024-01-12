@@ -14,7 +14,7 @@ export class User{
     @Prop({ default: Date.now })
     updatedAt: Date;
 
-    @Prop({required:true})
+    @Prop({required:true,unique:true})
     email:string;
 
     @Prop({required:true})

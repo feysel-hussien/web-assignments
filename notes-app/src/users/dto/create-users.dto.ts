@@ -1,9 +1,7 @@
 import { IsEmail, IsNotEmpty, MinLength } from "class-validator";
-import { UUID } from "mongodb";
 
 export class CreateUsersDto {
 
-    userId:UUID;
     
     @IsNotEmpty()
     name:string;
