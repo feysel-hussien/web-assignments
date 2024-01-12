@@ -18,28 +18,28 @@ export class NotesController {
     // @UseGuards(JwtAuthGuard)
     @Delete(':id')
     remove(@Param('id') id: string, @Req() req:any){
-        return this.notesService.remove(id, req.userId);
+        return this.notesService.remove(id, req.headers['user-id']);
     }
 
     //findnotes get
     // @UseGuards(JwtAuthGuard)
     @Get(':id')
     findById(@Param('id') id:string, @Req() req:any){
-        return this.notesService.findById(id,req.userId)
+        return this.notesService.findById(id,req.headers['user-id'])
     }
 
     //find all notes from my data base
     // @UseGuards(JwtAuthGuard)
     @Get()
     findAll(@Req() req:any){
-        return this.notesService.findAll(req.userId);
+        return this.notesService.findAll(req.headers['user-id']);
     }
 
 //editing notes 
     // @UseGuards(JwtAuthGuard)
     @Patch(':id')
     update(@Body() updateNoteDto:UpdateNotesDto, @Param('id') id:string, @Req() req: any){
-        return this.notesService.update(id, updateNoteDto, req.userId);
+        return this.notesService.update(id, updateNoteDto, req.headers['user-id']);
     }
 
 }
