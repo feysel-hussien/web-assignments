@@ -19,31 +19,22 @@ export class UsersService {
         if (existingUser){
             throw new ConflictException('Email already exists');
         }
-        
+
         const createdUser = new this.userModel(createUserDto);
         return createdUser.save();
 
     }
 
-    // async createUser(createUsersDto:CreateUsersDto){
-    //     const userId=randomUUID();
+    async login(loginUserDto:LoginUserDto): Promise<User>{
+        const user = await this.userModel.findOne({ email: loginUserDto.email }).exec();
+        if (!user){
+            throw new Error('User not found');
+        }
+        if (user.password !== loginUserDto.password) {
+            throw new Error('Incorrect password');
+        }
 
-    //     const user={
-    //         id:userId,
-    //         username:createUsersDto.name,
-    //         password:createUsersDto.password,
-    //         best_friend:createUsersDto.best_friend,
-    //     };
-    //     this.users.set(userId,user);
-
-
-
-    //     return {id:userId,username:user.username}
-
-
-    // }
-    async login(loginUserDTo:LoginUserDto): Promise<{accessToken:string}>{
-        return;
+        return user;
     
     }
 

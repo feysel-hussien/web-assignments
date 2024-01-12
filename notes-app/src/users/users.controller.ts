@@ -15,7 +15,7 @@ register(@Body() createUsersDt:CreateUsersDto):Promise<User>{
 }
 
 @Post('login')
-login(@Body() loginUserDto:LoginUserDto):Promise<{accessToken:string}>{
+login(@Body() loginUserDto:LoginUserDto):Promise<User>{
     return this.usersService.login(loginUserDto)
 }
 
