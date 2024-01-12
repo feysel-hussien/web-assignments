@@ -56,12 +56,15 @@ export class NotesService {
     async update(id:string,updateNoteDto:UpdateNotesDto,userId:string):Promise <Note>{
         const updatedNote = await this.noteModel
         .findOneAndUpdate(
-            {_id:id,userId},{$set:updateNoteDto},{new:true}
+            {_id:id,userId},
+            {$set:{...updateNoteDto, updatedAt:new Date()}},
+            {new:true}
         ).exec();
 
         if(!updatedNote){
             throw new NotFoundException('Note not found');
         }
+        console.log("successful update")
         return updatedNote;
 
     }

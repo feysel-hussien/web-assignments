@@ -6,10 +6,10 @@ import {  Document } from "mongoose";
 
 @Schema()
 export class Note{
-    @Prop()
+    @Prop({required:true})
     title:string
 
-    @Prop()
+    @Prop({required:true})
     content:string;
 
     @Prop({type:String,ref:'User'})
