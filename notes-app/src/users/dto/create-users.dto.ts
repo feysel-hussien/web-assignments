@@ -10,7 +10,6 @@ export class CreateUsersDto {
     @MinLength(6)
     password:string;
 
-    @IsNotEmpty()
     best_friend:string;
 
     @IsNotEmpty()
