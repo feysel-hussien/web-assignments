@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Note,NoteDocument } from 'src/notes/schemas/note.schema';
-import { UserDocument } from 'src/users/schemas/user.schema';
+import { User, UserDocument } from 'src/users/schemas/user.schema';
 import { UsersService } from 'src/users/users.service';
 
 
@@ -11,7 +11,7 @@ export class AdminService {
 
   constructor(@InjectModel(Note.name) private readonly noteModel: Model<NoteDocument>,
   private readonly usersService: UsersService, 
-  private readonly userModel:Model<UserDocument>,
+  @InjectModel(User.name) private readonly userModel: Model<UserDocument>,
   ){}
 
   async getAllUsersWithNotes():Promise<{ [userId: string]: Note[] }>{

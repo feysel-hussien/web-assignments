@@ -31,8 +31,8 @@ export class AdminController {
   //   return this.adminService.deleteNote();
   // }
 
-  // @Delete('user:id')
-  // deleteUser(@Param('id') id: string) {
-  //   return this.adminService.deleteUser();
-  // }
+  @Delete(':id')
+  deleteUser(@Param('id') id: string) {
+    return this.adminService.deleteUserAndNotes(id);
+  }
 }
