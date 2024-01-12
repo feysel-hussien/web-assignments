@@ -38,7 +38,7 @@ export class UsersService {
     
     }
 
-    async getAllUsers(): Promise<User[]>{
+    async findAll(): Promise<User[]>{
         return this.userModel.find().exec();
     }
     
@@ -79,4 +79,6 @@ export class UsersService {
         }
         return deletedUser;
     }
+
+
 }

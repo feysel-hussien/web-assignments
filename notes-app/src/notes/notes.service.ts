@@ -10,11 +10,13 @@ export class NotesService {
 
     constructor(@InjectModel(Note.name) private readonly noteModel: Model<NoteDocument>){}
 
-    async create(createNoteDto:CreateNotesDto,userId:string):Promise <Note>{
-
-        const createdNote = new this.noteModel({...createNoteDto,userId});
+    async create(createNoteDto:CreateNotesDto,UserId:string):Promise <Note>{
+        createNoteDto.userId=UserId;
+        console.log('User Id:' ,UserId)
+        const createdNote = new this.noteModel({...createNoteDto});
+        console.log(createdNote.userId);
         console.log('Note created successfully')
-        return createdNote.save()
+        return createdNote.save();
 
     }
 

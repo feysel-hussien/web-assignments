@@ -42,45 +42,9 @@ deleteAccount(@Param('id') id:string):Promise<User>{
 // @Roles('admin')
 @Get('all')
 getAllUsers():Promise<User[]>{
-    return this.usersService.getAllUsers();
+    return this.usersService.findAll();
 }
 
 }
 
 
-
-
-
-
-// //Get /users/:id  --> {...}
-// @Get(':id')
-// getOneUser(@Param('id') id:string){
-//     const user =this.usersService.findOne(id);
-//     if (!user){
-//         throw new Error('User not find');
-//     }
-//     return {
-//         user
-//     }
-// }
-// //POST /users 
-// // @Post('login')
-// // async createUser(@Body() createUsersDto: CreateUsersDto ){
-// //     this.usersService.register(createUsersDto);
-
-// //     return {
-// //         name:createUsersDto.name,
-// //         password:createUsersDto.password,
-// //         best_friend:createUsersDto.best_friend,
-// //     }
-// // }
-
-// // PUT /users -->{ .... }
-
-// @Put(':id')
-// updateUser(@Param('id') id:string){
-//     return {}
-// }
-// //DELETE / users/:id
-
-// }

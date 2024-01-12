@@ -1,14 +1,29 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAdminDto } from './dto/create-admin.dto';
-import { UpdateAdminDto } from './dto/update-admin.dto';
-import { NotesService } from 'src/notes/notes.service';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Note,NoteDocument } from 'src/notes/schemas/note.schema';
+import { UsersService } from 'src/users/users.service';
+
 
 @Injectable()
 export class AdminService {
 
-  constructor(private readonly notesService: NotesService){}
+  constructor(@InjectModel(Note.name) private readonly noteModel: Model<NoteDocument>,
+  private readonly usersService: UsersService,
+  ){}
 
-//   getAllUsers(){}
+  async getAllUsersWithNotes():Promise<Map<string,Note[]>>{
+
+    const allUsers = await this.usersService.findAll();
+    const result = new Map <string,Note[]>();
+
+    for (const user of allUsers){
+      const userNotes = await this.noteModel.find({userId:user._id}).exec();
+
+      result.set(user._id.toString(),userNotes);
+    }
+    return result;
+  }
 
 //   getAllNotes(){
 //     return this.notesService.findAll('id');

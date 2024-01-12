@@ -21,10 +21,10 @@ export class AdminController {
   // }
 
 
-  // @Get('users')
-  // getAllUsers() {
-  //   return this.adminService.getAllUsers();
-  // }
+  @Get('allwithnotes')
+  getAllUsers() {
+    return this.adminService.getAllUsersWithNotes();
+  }
 
   // @Delete('note/:id')
   // deleteNote(@Param('id') id: string) {

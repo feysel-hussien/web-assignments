@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Types } from "mongoose";
 
 @Schema()
 export class User{
@@ -19,6 +20,8 @@ export class User{
 
     @Prop({required:true})
     best_friend:string;
+
+    _id:Types.ObjectId;
 
 }
 

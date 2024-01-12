@@ -1,7 +1,17 @@
-import { UUID } from "mongodb";
+import { IsNotEmpty } from "class-validator";
+
 
 export class CreateNotesDto {
+    @IsNotEmpty()
     title:string;
+
+    @IsNotEmpty()
     content:string;
-    notesId:UUID;
+
+    @IsNotEmpty()
+    userId:string;
+    
+    @IsNotEmpty()
+    notesId:string;
+
 }
