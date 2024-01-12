@@ -1,11 +1,22 @@
 import { Module } from '@nestjs/common';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
-import { RolesService } from 'src/roles/roles.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { User, UserSchema } from './schemas/user.schema';
+import {  createMongooseOptions } from 'database.config';
+
+
 
 @Module({
+  imports:[
+    MongooseModule.forFeature([{name:User.name,schema:UserSchema}]),
+    MongooseModule.forRootAsync({
+      useFactory: createMongooseOptions,
+    }),
+
+  ],
   controllers: [UsersController],
-  providers: [UsersService,RolesService],
+  providers: [UsersService],
   exports:[UsersService],
 })
 export class UsersModule {}

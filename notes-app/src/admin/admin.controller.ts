@@ -9,30 +9,30 @@ export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
 
-  @Get('notes')
-  getAllNotes() {
-    return this.adminService.getAllNotes();
-  }
+  // @Get('notes')
+  // getAllNotes() {
+  //   return this.adminService.getAllNotes();
+  // }
 
 
-  @Get('notes/:id')
-  getNoteById(@Param('id') id: string) {
-    return this.adminService.getNoteById();
-  }
+  // @Get('notes/:id')
+  // getNoteById(@Param('id') id: string) {
+  //   return this.adminService.getNoteById();
+  // }
 
 
-  @Get('users')
-  getAllUsers() {
-    return this.adminService.getAllUsers();
-  }
+  // @Get('users')
+  // getAllUsers() {
+  //   return this.adminService.getAllUsers();
+  // }
 
-  @Delete('note/:id')
-  deleteNote(@Param('id') id: string) {
-    return this.adminService.deleteNote();
-  }
+  // @Delete('note/:id')
+  // deleteNote(@Param('id') id: string) {
+  //   return this.adminService.deleteNote();
+  // }
 
-  @Delete('user:id')
-  deleteUser(@Param('id') id: string) {
-    return this.adminService.deleteUser();
-  }
+  // @Delete('user:id')
+  // deleteUser(@Param('id') id: string) {
+  //   return this.adminService.deleteUser();
+  // }
 }

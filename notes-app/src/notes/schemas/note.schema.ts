@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { HydratedDocument, Document } from "mongoose";
+import {  Document } from "mongoose";
 
 
 // export type noteDocument =HydratedDocument<note>;
@@ -12,7 +12,7 @@ export class Note{
     @Prop()
     content:string;
 
-    @Prop()
+    @Prop({type:String,ref:'User'})
     userId:string;
 
     //Time stamps

@@ -8,19 +8,20 @@ export class AdminService {
 
   constructor(private readonly notesService: NotesService){}
 
-  getAllUsers(){}
+//   getAllUsers(){}
 
-  getAllNotes(){
-    return this.notesService.findAll('id');
-  }
+//   getAllNotes(){
+//     return this.notesService.findAll('id');
+//   }
 
-  getNoteById(){
-    return this.notesService.findById()
-  }
+//   getNoteById(){
+//     return this.notesService.findById()
+//   }
 
-  deleteNote(noteId:string){
-    return this.notesService.remove('noteId','id')
-  }
+//   deleteNote(noteId:string){
+//     return this.notesService.remove('noteId','id')
+//   }
 
-  deleteUser(userId:string){}
+//   deleteUser(userId:string){}
+// }
 }

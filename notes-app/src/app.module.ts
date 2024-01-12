@@ -6,10 +6,14 @@ import { UsersModule } from './users/users.module';
 import { NotesModule } from './notes/notes.module';
 import { AdminModule } from './admin/admin.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { createMongooseOptions } from 'database.config';
+
 
 @Module({
   imports: [AuthModule, UsersModule, NotesModule, AdminModule, AdminModule,
-  MongooseModule.forRoot('mongodb://localhost/nest')],
+    MongooseModule.forRootAsync({
+      useFactory: createMongooseOptions,
+    }),],
   controllers: [AppController],
   providers: [AppService],
 })
