@@ -10,8 +10,8 @@ export class CreateNotesDto {
 
     @IsNotEmpty()
     userId:string;
-    
-    @IsNotEmpty()
-    notesId:string;
+
+    // @IsNotEmpty()
+    // notesId:string;
 
 }

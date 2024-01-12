@@ -12,7 +12,7 @@ export class Note{
     @Prop({required:true})
     content:string;
 
-    @Prop({type:String,ref:'User'})
+    @Prop({type:Types.ObjectId,ref:'User'})
     userId:string;
 
     //Time stamps

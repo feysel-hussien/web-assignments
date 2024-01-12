@@ -12,7 +12,7 @@ export class NotesController {
     // @UseGuards(JwtAuthGuard)
     @Post()
     create(@Body() createNoteDto: CreateNotesDto,@Req() req:any){
-        return this.notesService.create(createNoteDto,req.userId);
+        return this.notesService.create(createNoteDto,req.headers);
     }
 //Delete notes By Id
     // @UseGuards(JwtAuthGuard)
