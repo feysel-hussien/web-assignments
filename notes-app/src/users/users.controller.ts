@@ -29,11 +29,12 @@ async register(@Body() createUsersDto:CreateUsersDto):Promise<User>{
 
 @Post('login')
 @UsePipes(new ValidationPipe({transform:true}))
-async login(@Body() loginUserDto:LoginUserDto):Promise<User>{
-    const user= await this.authService.validateUser(loginUserDto.email,loginUserDto.password);
+async login(@Body() loginUserDto:LoginUserDto){
+    const user= await this.authService.login(loginUserDto.email,loginUserDto.password);
+    console.log(user)
 
     if(!user){
-        throw new BadRequestException('Innvalid credentials');
+        throw new BadRequestException('Invalid credentials');
     }
     return user;
 }
