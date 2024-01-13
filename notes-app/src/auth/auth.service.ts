@@ -1,6 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { User } from 'src/users/schemas/user.schema';
 import { UsersService } from 'src/users/users.service';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -8,14 +10,18 @@ export class AuthService {
         private UsersService: UsersService,
         private jwtService:JwtService
         ){}
-    // async signIn(username:string,pass:string){
-    //     const user = await this.UsersService.findOne(username);
-    //     if (user?.password !==pass){
-    //         throw new UnauthorizedException();
-    //     }
-    //     const payload ={ sub: user.userId, username:user.username};
-    //     return {
-    //         access_token:await this.jwtService.signAsync(payload),
-    //     };
-    // }
-}
+
+        async validateUser (email:string,password:string):Promise<User|null>{
+            const user = await this.UsersService.findByEmail(email);
+            if (!user){
+           throw new BadRequestException('Incorrect email');
+        }
+        if (await bcrypt.compare(password,user.password)) {
+            const {password, ...result}=user;
+            return result;
+        }
+
+        return null;
+        }
+    }
+

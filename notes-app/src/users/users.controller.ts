@@ -1,15 +1,18 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Put, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Patch, Post, Put, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CreateUsersDto } from './dto/create-users.dto';
 import { UsersService } from './users.service';
 import { User } from './schemas/user.schema';
 import { UpdateUsersDto } from './dto/update-users.dto';
 import { LoginUserDto } from './dto/login-users.dto';
 import * as bcrypt from 'bcrypt';
+import { AuthService } from '../auth/auth.service';
 
 
 @Controller('users')
 export class UsersController {
-    constructor(private readonly usersService: UsersService){}
+    constructor(private readonly usersService: UsersService,
+        private readonly authService:AuthService){}
+
 
 @Post('register')
 @UsePipes(new ValidationPipe({transform:true}))
@@ -25,8 +28,14 @@ async register(@Body() createUsersDto:CreateUsersDto):Promise<User>{
 }
 
 @Post('login')
+@UsePipes(new ValidationPipe({transform:true}))
 async login(@Body() loginUserDto:LoginUserDto):Promise<User>{
-    return this.usersService.login(loginUserDto)
+    const user= await this.authService.validateUser(loginUserDto.email,loginUserDto.password);
+
+    if(!user){
+        throw new BadRequestException('Innvalid credentials');
+    }
+    return user;
 }
 
 // @UseGuards(JwtAuthGuard)
