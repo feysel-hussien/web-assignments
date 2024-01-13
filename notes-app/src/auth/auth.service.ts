@@ -9,12 +9,12 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class AuthService {
   constructor(
-    private UsersService: UsersService,
+    private usersService: UsersService,
     private jwtService: JwtService
   ) {}
 
   async validateUser(email: string, password: string): Promise<any>| null {
-    const user = await this.UsersService.findByEmail(email);
+    const user = await this.usersService.findByEmail(email);
     if (!user) {
       throw new BadRequestException('Incorrect email');
     }
@@ -25,13 +25,14 @@ export class AuthService {
     throw new BadRequestException('Incorrect password');
   }
   async login(email:string,password:string){
+    
     const user = await this.validateUser(email,password);
 
     if (user){
         const payload ={email:user.email,sub:user.userId};
 
         return {
-            access_token:this.jwtService.sign(payload),
+            access_token:this.jwtService.signAsync(payload),
         }
     }
         else{
