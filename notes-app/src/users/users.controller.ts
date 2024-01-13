@@ -6,6 +6,7 @@ import { UpdateUsersDto } from './dto/update-users.dto';
 import { LoginUserDto } from './dto/login-users.dto';
 import * as bcrypt from 'bcrypt';
 import { AuthService } from '../auth/auth.service';
+import { JwtAuthGuard } from 'src/auth/auth.guard';
 
 
 @Controller('users')
@@ -31,15 +32,16 @@ async register(@Body() createUsersDto:CreateUsersDto):Promise<User>{
 @UsePipes(new ValidationPipe({transform:true}))
 async login(@Body() loginUserDto:LoginUserDto){
     const user= await this.authService.login(loginUserDto.email,loginUserDto.password);
-    console.log(user)
 
     if(!user){
         throw new BadRequestException('Invalid credentials');
     }
-    return user;
+    const token = this.authService.login(user.email,user.password);
+
+    return {access_token:token};
 }
 
-// @UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
 @Get('profile/:id')
 async profile(@Param('id') id:string):Promise<User>{
     return this.usersService.profile(id);
@@ -51,7 +53,7 @@ async updateProfile(@Param('id') id: string, @Body() updateUserDto: UpdateUsersD
   return this.usersService.updateProfile(id, updateUserDto);
 }
 
-// @UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
 @Delete('delete/:id')
 async deleteAccount(@Param('id') id:string):Promise<User>{
     return this.usersService.deleteAccount(id);

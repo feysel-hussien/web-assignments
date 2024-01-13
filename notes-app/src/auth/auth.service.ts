@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { User } from 'src/users/schemas/user.schema';
 import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
+import { access } from 'fs';
 
 
 
@@ -18,21 +19,20 @@ export class AuthService {
     if (!user) {
       throw new BadRequestException('Incorrect email');
     }
-    if (await bcrypt.compare(password, user.password)) {
-
+    else if (await bcrypt.compare(password, user.password)) {
       return user;
     }
     throw new BadRequestException('Incorrect password');
   }
-  async login(email:string,password:string){
-    
+  async login(email:string,password:string):Promise<any>{
     const user = await this.validateUser(email,password);
 
     if (user){
-        const payload ={email:user.email,sub:user.userId};
-
+        const payload ={email:user.email,sub:user._id};
+        
         return {
-            access_token:this.jwtService.signAsync(payload),
+          access_token:this.jwtService.signAsync(payload)
+  
         }
     }
         else{
