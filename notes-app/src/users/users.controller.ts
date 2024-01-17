@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Patch, Post, Put, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Patch, Post, Put, Req, Request, Res, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CreateUsersDto } from './dto/create-users.dto';
 import { UsersService } from './users.service';
 import { User } from './schemas/user.schema';
@@ -7,6 +7,7 @@ import { LoginUserDto } from './dto/login-users.dto';
 import * as bcrypt from 'bcrypt';
 import { AuthService } from '../auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/auth.guard';
+import { response } from 'express';
 
 
 @Controller('users')
@@ -30,15 +31,22 @@ async register(@Body() createUsersDto:CreateUsersDto):Promise<User>{
 
 @Post('login')
 @UsePipes(new ValidationPipe({transform:true}))
-async login(@Body() loginUserDto:LoginUserDto){
-    const user= await this.authService.login(loginUserDto.email,loginUserDto.password);
-
-    if(!user){
-        throw new BadRequestException('Invalid credentials');
+async login(@Body() loginUserDto:LoginUserDto,@Req() request, @Res() response){
+    const user= await this.authService.login(loginUserDto.email,loginUserDto.password,request,response);
+    try{
+        if(!user){
+            throw new BadRequestException('Invalid credentials');
+        }
+        console.log(`found the user ${user}`)
+        return user;
+        // const token = user.access_token;
+        // console.log(request.cookie['access_token']);
+        // return {access_token:token};
     }
-    const token = this.authService.login(user.email,user.password);
-
-    return {access_token:token};
+    catch(error){
+        console.log(error);
+        return error 
+    }
 }
 
 @UseGuards(JwtAuthGuard)

@@ -4,6 +4,7 @@ import { User } from 'src/users/schemas/user.schema';
 import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
 import { access } from 'fs';
+import { Request,Response } from 'express';
 
 
 
@@ -16,30 +17,45 @@ export class AuthService {
 
   async validateUser(email: string, password: string): Promise<any>| null {
     const user = await this.usersService.findByEmail(email);
+    try{
     if (!user) {
-      throw new BadRequestException('Incorrect email');
+         throw new UnauthorizedException('Incorrect email');
     }
     else if (await bcrypt.compare(password, user.password)) {
       return user;
     }
-    throw new BadRequestException('Incorrect password');
+     throw new UnauthorizedException('Incorrect password');
   }
-  async login(email:string,password:string):Promise<any>{
+  catch(error){
+    throw error;
+
+  }
+}
+  async login(email:string,password:string,request:Request,response:Response):Promise<any>{
     const user = await this.validateUser(email,password);
 
+    try{
     if (user){
-        const payload ={email:user.email,sub:user._id};
-        
-        return {
-          access_token:this.jwtService.signAsync(payload)
-  
-        }
+        const payload ={id:user._id};
+        const access_token= await this.jwtService.signAsync(payload);
+
+        // response.cookie('access_token', access_token, {
+        //   httpOnly: true,
+        //   secure: true,
+        //   sameSite: 'strict', 
+        // });
+        return access_token;
     }
         else{
-            throw new UnauthorizedException("Invalid creditionals")
+            throw  new UnauthorizedException("Invalid creditionals")
 
     }
+  } catch(error){
+    throw error;
   }
+  
+  
+}
 
   async validateToken(request:any):Promise<boolean>{
     const bearerToken = request.headers.auhorization;
