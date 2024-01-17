@@ -12,7 +12,7 @@ export class AuthController {
         @HttpCode(HttpStatus.OK)
         @Post('login')
         login(@Body() LoginUserDto: Record<string,any>,@Req() request, @Res() response){
-            return this.authService.login(LoginUserDto.username,LoginUserDto.password,request,response);
+            return this.authService.login(LoginUserDto.username,LoginUserDto.password);
         }
 
         @UseGuards(JwtAuthGuard)

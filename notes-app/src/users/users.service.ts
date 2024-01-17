@@ -48,7 +48,7 @@ export class UsersService {
 
     async updateProfile(userId:string,updateUserDto:UpdateUsersDto):Promise<User>{
         const updatedUser = await this.userModel
-        .findOneAndUpdate({ _id:userId}, {$set: UpdateUsersDto},{new:true})
+        .findOneAndUpdate({ _id:userId}, {$set: updateUserDto},{new:true})
         .exec();
 
         if (!updatedUser){

@@ -22,7 +22,5 @@ import { MongooseModuleOptions } from '@nestjs/mongoose';
 export const createMongooseOptions = (): MongooseModuleOptions => {
   return {
     uri: 'mongodb://localhost:27017', // Replace with your actual MongoDB connection string
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
   } as MongooseModuleOptions;
 };

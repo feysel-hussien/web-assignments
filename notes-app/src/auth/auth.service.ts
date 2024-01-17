@@ -31,7 +31,7 @@ export class AuthService {
 
   }
 }
-  async login(email:string,password:string,request:Request,response:Response):Promise<any>{
+  async login(email:string,password:string):Promise<any>{
     const user = await this.validateUser(email,password);
 
     try{
@@ -44,6 +44,7 @@ export class AuthService {
         //   secure: true,
         //   sameSite: 'strict', 
         // });
+        console.log("Finished checking creditials and returned an access token")
         return access_token;
     }
         else{
