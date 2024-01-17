@@ -23,7 +23,7 @@ export class JwtAuthGuard implements CanActivate{
                         secret:jwtConstants.secret
                     }
                 );
-                request['user']=payload;
+                request.user=payload;
                 console.log(request.headers)
 
             }

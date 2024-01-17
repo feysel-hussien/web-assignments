@@ -58,8 +58,8 @@ async profile(@Param('id') id:string):Promise<User>{
     return this.usersService.profile(id);
 }
 
-@UseGuards(JwtAuthGuard)
 @Patch('update/:id')
+@UseGuards(JwtAuthGuard)
 async updateProfile(@Param('id') id: string, @Body() updateUserDto: UpdateUsersDto): Promise<User> {
   return this.usersService.updateProfile(id, updateUserDto);
 }

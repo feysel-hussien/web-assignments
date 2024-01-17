@@ -73,16 +73,6 @@ export class UsersService {
         return this.userModel.findOne({ email }).exec();
       }
 
-          // async login(loginUserDto:LoginUserDto): Promise<User>{
-    //     // const user = await this.userModel.findOne({ email: loginUserDto.email }).exec();
-    //     // if (!user){
-    //     //    throw new BadRequestException('Incorrect email');
-    //     // }
-    //     // if (! await bcrypt.compare(loginUserDto.password,user.password)) {
-    //     //     throw new BadRequestException('Incorrect password');
-    //     // }
-
-    //     return this.auth;
 
 
 }
