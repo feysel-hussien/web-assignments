@@ -30,8 +30,8 @@ CRUD operations for creating, reading, updating, and deleting notes.
 Our web application is a notes management platform that allows users to  create, organize, and edit their notes. 
 
 
-# How to test out web application </br>
-**1. Run the command //npx tsc to transcpile the typescript to javacript**
-**2. Go to the ripo and run the command //nest start --watch//**
-**3 Go to index.html in notes front end directory which displays the login page**
+# How to test out web application </br />
+**1. Run the command //npx tsc to transcpile the typescript to javacript** </br />
+**2. Go to the ripo and run the command //nest start --watch//** </br />
+**3 Go to index.html in notes front end directory which displays the login page**</br />
 
