@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import * as cookieParser from 'cookie-parser';
 import { UsersService } from './users/users.service';
 import { Role } from './roles/role.enum';
+const port= 5001;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule,{cors:true});
@@ -31,6 +32,6 @@ async function bootstrap() {
   }
   
   await app.listen(5001);
-  console.log(`Application is running on:${await app.getUrl()}`)
+  console.log(`Application is running on port: http://localhost:${port}`)
 }
 bootstrap();
