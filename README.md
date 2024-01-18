@@ -37,11 +37,11 @@ Our web application is a notes management platform that allows users to  create,
 
 
 # Admin Information 
-1.  **name:**betsegaw <br />
-    **email:**betsegaw@gmail.com <br />
-    **password:**betsegaw<br />
+1.  **name:** betsegaw <br />
+    **email:** betsegaw@gmail.com <br />
+    **password:** betsegaw<br />
 
-2. **name:**"nahom"<br />
-**email:**nahom.garefo@aait.edu.et <br />
-**password:**"nahomnahom <br />
+2. **name:** nahom<br />
+**email:** nahom.garefo@aait.edu.et <br />
+**password:** nahomnahom <br />
 
