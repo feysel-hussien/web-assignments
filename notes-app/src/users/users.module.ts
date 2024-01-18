@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from './schemas/user.schema';
 import {  createMongooseOptions } from 'database.config';
 import { AuthService } from 'src/auth/auth.service';
+import { RolesGuard } from 'src/roles/roles.guard';
 
 
 
@@ -17,7 +18,7 @@ import { AuthService } from 'src/auth/auth.service';
 
   ],
   controllers: [UsersController],
-  providers: [UsersService,AuthService],
+  providers: [UsersService,AuthService,RolesGuard],
   exports:[UsersService],
 })
 export class UsersModule {}

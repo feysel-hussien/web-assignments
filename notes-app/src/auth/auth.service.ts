@@ -17,6 +17,7 @@ export class AuthService {
 
   async validateUser(email: string, password: string): Promise<any>| null {
     const user = await this.usersService.findByEmail(email);
+    // console.log(user)
     try{
     if (!user) {
          throw new UnauthorizedException('Incorrect email');
@@ -36,7 +37,9 @@ export class AuthService {
 
     try{
     if (user){
-        const payload ={id:user._id};
+      // console.log(`Checking creditials for user ${user}`);
+        const payload ={id:user._id,role:user.role};
+        // console.log(payload)
         const access_token= await this.jwtService.signAsync(payload);
 
         // response.cookie('access_token', access_token, {
@@ -44,8 +47,9 @@ export class AuthService {
         //   secure: true,
         //   sameSite: 'strict', 
         // });
-        console.log("Finished checking creditials and returned an access token")
-        return access_token;
+        // console.log(`Finished checking creditials and returned an access token and user ${user}`)
+        // console.log(access_token,user);
+        return {jwt:access_token,user:user};
     }
         else{
             throw  new UnauthorizedException("Invalid creditionals")

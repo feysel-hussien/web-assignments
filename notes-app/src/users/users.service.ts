@@ -6,6 +6,7 @@ import { Model } from 'mongoose';
 import { UpdateUsersDto } from './dto/update-users.dto';
 import { LoginUserDto } from './dto/login-users.dto';
 import * as bcrypt from 'bcrypt';
+import { Role } from 'src/roles/role.enum';
 
 
 @Injectable()
@@ -21,7 +22,7 @@ export class UsersService {
             throw new ConflictException('Email already exists');
         }
 
-        const createdUser = new this.userModel(createUserDto);
+        const createdUser = new this.userModel({...createUserDto,role:Role.User});
         return createdUser.save();
 
     }
@@ -71,6 +72,25 @@ export class UsersService {
 
     async findByEmail(email: string): Promise<User | null> {
         return this.userModel.findOne({ email }).exec();
+      }
+
+    async findAdminUsers():Promise<User[]>{
+        return this.userModel.find({role:Role.Admin}).exec();
+    }
+
+    async createAdmin(adminData: { name: string; email: string; password: string; role: Role; }) {
+        const admins= await this.findAdminUsers();
+        const hashedPassword = await bcrypt.hash(adminData.password,10);
+        const admin = new this.userModel({...adminData, id:(admins.length)+1 ,password:hashedPassword});
+        return admin.save();
+      }
+
+      async findOne(id: string): Promise<User | undefined> {
+        const user = this.userModel.findById(id);
+        if (!user) {
+          throw new BadRequestException('User not found');
+        }
+        return user;
       }
 
 

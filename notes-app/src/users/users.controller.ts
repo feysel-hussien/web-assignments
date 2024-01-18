@@ -9,6 +9,10 @@ import { AuthService } from '../auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/auth.guard';
 import {  Response} from 'express';
 import { Roles } from 'src/roles/roles.decorator';
+import { AuthorizationGuard } from 'src/auth/authorization.guard';
+import { Role } from 'src/roles/role.enum';
+import { RolesGuard } from 'src/roles/roles.guard';
+import { request } from 'http';
 
 
 @Controller('users')
@@ -16,10 +20,10 @@ export class UsersController {
     constructor(private readonly usersService: UsersService,
         private readonly authService:AuthService){}
 
-
 @Post('register')
-@UsePipes(new ValidationPipe({transform:true}))
+// @UsePipes(new ValidationPipe({transform:true}))
 async register(@Body() createUsersDto:CreateUsersDto):Promise<User>{
+    // console.log("inside register")
     const hashedPassword = await bcrypt.hash(createUsersDto.password,10);
 
     const userWithHashedPassword :CreateUsersDto={
@@ -34,17 +38,20 @@ async register(@Body() createUsersDto:CreateUsersDto):Promise<User>{
 @UsePipes(new ValidationPipe({transform:true}))
 async login(@Body() loginUserDto:LoginUserDto,
  @Res({passthrough:true}) response:Response){
-    const jwt= await this.authService.login(loginUserDto.email,loginUserDto.password);
+    // console.log("inside login")
+    const {jwt,user}= await this.authService.login(loginUserDto.email,loginUserDto.password);
     try{
         if(!jwt){
             throw new BadRequestException('Invalid credentials');
         }
-        console.log(`found the user ${jwt}`)
+        // console.log(response.getHeaders());
         response.cookie('jwt',jwt,{httpOnly:true})
-        return jwt;
+        // console.log(response[user]);
         // const token = user.access_token;
-        // console.log(request.cookie['access_token']);
+        console.log('successfully logged in')
+        console.log(response.user);
         // return {access_token:token};
+        return user;
     }
     catch(error){
         console.log(error);
@@ -52,29 +59,31 @@ async login(@Body() loginUserDto:LoginUserDto,
     }
 }
 
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 @Get('profile/:id')
 async profile(@Param('id') id:string):Promise<User>{
     return this.usersService.profile(id);
 }
 
 @Patch('update/:id')
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 async updateProfile(@Param('id') id: string, @Body() updateUserDto: UpdateUsersDto): Promise<User> {
   return this.usersService.updateProfile(id, updateUserDto);
 }
 
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 @Delete('delete/:id')
 async deleteAccount(@Param('id') id:string):Promise<User>{
     return this.usersService.deleteAccount(id);
 }
 
 //Admin route to get all users
-// @UseGuards(JWtAuthGuard,RolesGuard)
-// @Roles(['admin'])
+@UseGuards(JwtAuthGuard)
+@Roles(Role.Admin)
+@UseGuards(RolesGuard)
 @Get('all')
-async getAllUsers():Promise<User[]>{
+async getAllUsers(@Req() {user}):Promise<User[]>{
+    console.log()
     return this.usersService.findAll();
 }
 

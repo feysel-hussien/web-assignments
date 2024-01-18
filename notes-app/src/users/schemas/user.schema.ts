@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Types } from "mongoose";
+import { Role } from "src/roles/role.enum";
 
 @Schema()
 export class User{
@@ -18,8 +19,11 @@ export class User{
     @Prop({required:true,unique:true})
     email:string;
 
-    @Prop({required:true})
+    @Prop()
     best_friend:string;
+
+    @Prop()
+    role:Role;
 
     _id:Types.ObjectId;
 
