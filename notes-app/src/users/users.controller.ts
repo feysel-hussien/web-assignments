@@ -13,6 +13,7 @@ import { AuthorizationGuard } from 'src/auth/authorization.guard';
 import { Role } from 'src/roles/role.enum';
 import { RolesGuard } from 'src/roles/roles.guard';
 import { request } from 'http';
+import { access } from 'fs';
 
 
 @Controller('users')
@@ -44,7 +45,8 @@ async login(@Body() loginUserDto:LoginUserDto,
             throw new BadRequestException('Invalid credentials');
         }
         response.cookie('jwt',access_token,{httpOnly:true})
-        return user;
+        // console.log(user,access_token);
+        return {user,access_token};
     }
     catch(error){
         console.log(error);
