@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>admin homePage</title>
-    <link rel="stylesheet" href="styles/main.css">
-    <script src="index.js"></script>
+    <title>Notes App</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <script src="userindex.js"></script>
     <style >
         body{
-            background-image: url(admin\ image.png);
+            background-image: url(../images.jpg);
             background-size: cover; 
             background-repeat: repeat;
         }
@@ -18,13 +18,27 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="my-4">User Notes</h1>
+        <h1 class="my-4">Add a Note</h1>
+    <form>
+        
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" aria-describedby="titleHelp">
+             <div id="titleHelp" class="form-text">Try to add descriptive title.</div>
+         </div>
+        <div class="mb-3">
+            <label for="desc" class="form-label">Description</label>
+            <textarea type="text" class="form-control" id="desc"></textarea> 
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+        <h1 class="my-4">Your Notes</h1>
         <div class="mynotes row">
             <div class="card mx-2 my-4" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>
                     <p class="card-text">Some quick example text to build on the card</p>
-                    <button type="edit" class="btn btn-primary">Access</button>
+                    <button type="edit" class="btn btn-primary">Edit</button>
                     <button type="delete" class="btn btn-primary mr-2">Delete</button>
                     
 
@@ -36,7 +50,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>
                     <p class="card-text">Some quick example text to build on the card</p>
-                    <button type="submit" class="btn btn-primary">Access</button> 
+                    <button type="submit" class="btn btn-primary">Edit</button> 
                     <button type="submit" class="btn btn-primary mr-2">Delete</button>
                 </div>
             </div>   
@@ -45,14 +59,13 @@
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>
                     <p class="card-text">Some quick example text to build on the card</p>
-                    <button type="submit" class="btn btn-primary ml-6">Access</button> 
+                    <button type="submit" class="btn btn-primary ml-6">Edit</button> 
                     <button type="submit" class="btn btn-primary ">Delete</button>
                     
 
                 </div>
             </div>
-    </div>
-
+        </div>
             
 
         
