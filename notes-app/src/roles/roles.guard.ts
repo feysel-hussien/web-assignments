@@ -13,13 +13,15 @@ export class RolesGuard implements CanActivate{
             context.getHandler(),
             context.getClass(),
         ]);
-
+        // console.log(requiredRoles)
         if (!requiredRoles){
             return true;
         }
 
        const request = context.switchToHttp().getRequest();
        const user = request.user;
+    //    console.log(user.role,requiredRoles);
+       return requiredRoles.includes(user?.role);
     //    console.log(request.headers);
     //    const user = response.locals.user;
         // console.log("inside roles guard ")
@@ -28,9 +30,9 @@ export class RolesGuard implements CanActivate{
     //     return requiredRoles.includes(user?.role);
 
     // const { user } = context.switchToHttp().getRequest();
-    // console.log(user,requiredRoles)
-    if (!user){
-        return false;
-    }    return requiredRoles.includes(user.role);
+    // 
+    // if (!user){
+    //     return false;
+    // }    r
   }
     }

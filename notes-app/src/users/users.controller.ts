@@ -38,19 +38,12 @@ async register(@Body() createUsersDto:CreateUsersDto):Promise<User>{
 @UsePipes(new ValidationPipe({transform:true}))
 async login(@Body() loginUserDto:LoginUserDto,
  @Res({passthrough:true}) response:Response){
-    // console.log("inside login")
-    const {jwt,user}= await this.authService.login(loginUserDto.email,loginUserDto.password);
+    const {access_token,user}= await this.authService.login(loginUserDto.email,loginUserDto.password);
     try{
-        if(!jwt){
+        if(!access_token){
             throw new BadRequestException('Invalid credentials');
         }
-        // console.log(response.getHeaders());
-        response.cookie('jwt',jwt,{httpOnly:true})
-        // console.log(response[user]);
-        // const token = user.access_token;
-        console.log('successfully logged in')
-        console.log(response.user);
-        // return {access_token:token};
+        response.cookie('jwt',access_token,{httpOnly:true})
         return user;
     }
     catch(error){
@@ -59,38 +52,40 @@ async login(@Body() loginUserDto:LoginUserDto,
     }
 }
 
-// @UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
 @Get('profile/:id')
 async profile(@Param('id') id:string):Promise<User>{
     return this.usersService.profile(id);
 }
 
+@UseGuards(JwtAuthGuard)
 @Patch('update/:id')
-// @UseGuards(JwtAuthGuard)
 async updateProfile(@Param('id') id: string, @Body() updateUserDto: UpdateUsersDto): Promise<User> {
   return this.usersService.updateProfile(id, updateUserDto);
 }
 
-// @UseGuards(JwtAuthGuard)
+@Roles(Role.Admin)
+@UseGuards(JwtAuthGuard,RolesGuard)
 @Delete('delete/:id')
 async deleteAccount(@Param('id') id:string):Promise<User>{
     return this.usersService.deleteAccount(id);
 }
 
 //Admin route to get all users
-@UseGuards(JwtAuthGuard)
 @Roles(Role.Admin)
-@UseGuards(RolesGuard)
+@UseGuards(JwtAuthGuard,RolesGuard)
+// @UseGuards()
 @Get('all')
-async getAllUsers(@Req() {user}):Promise<User[]>{
-    console.log()
+async getAllUsers(@Req() request): Promise<User[]> {
+    console.log();
     return this.usersService.findAll();
 }
 
 
+@UseGuards(JwtAuthGuard)
 @Post('logout')
-async logout(@Res({passthrough:true}) response:Response){
-    response.clearCookie('jwt')
+async logout(@Res({passthrough:true}) response: Response) {
+    response.clearCookie('jwt');
 }
 
 }

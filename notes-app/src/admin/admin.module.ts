@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Note, NoteSchema } from 'src/notes/schemas/note.schema';
 import { UsersModule } from 'src/users/users.module';
 import { User, UserSchema } from 'src/users/schemas/user.schema';
+import { AuthService } from 'src/auth/auth.service';
 
 @Module({
   imports:[
@@ -15,6 +16,6 @@ import { User, UserSchema } from 'src/users/schemas/user.schema';
     UsersModule,
   ],
   controllers: [AdminController],
-  providers: [AdminService],
+  providers: [AdminService,AuthService],
 })
 export class AdminModule {}

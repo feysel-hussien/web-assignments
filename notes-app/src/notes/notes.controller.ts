@@ -30,7 +30,7 @@ export class NotesController {
         return this.notesService.findById(id,req.headers['user-id'])
     }
 
-    //find all notes from my data base
+    //find all notes from my data base by user id
     @UseGuards(JwtAuthGuard)
     @Get()
     findAll(@Req() req:any){

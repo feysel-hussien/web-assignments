@@ -4,7 +4,8 @@ import { User } from 'src/users/schemas/user.schema';
 import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
 import { access } from 'fs';
-import { Request,Response } from 'express';
+import { Request,Response, response } from 'express';
+import { jwtConstants } from './constants';
 
 
 
@@ -37,19 +38,11 @@ export class AuthService {
 
     try{
     if (user){
-      // console.log(`Checking creditials for user ${user}`);
-        const payload ={id:user._id,user:user};
-        // console.log(payload)
+        const payload ={id:user._id,role:user.role};
+         // for signing the token use the secrte key from the constants.ts file
         const access_token= await this.jwtService.signAsync(payload);
 
-        // response.cookie('access_token', access_token, {
-        //   httpOnly: true,
-        //   secure: true,
-        //   sameSite: 'strict', 
-        // });
-        // console.log(`Finished checking creditials and returned an access token and user ${user}`)
-        // console.log(access_token,user);
-        return {jwt:access_token,user:user};
+        return {access_token,user};
     }
         else{
             throw  new UnauthorizedException("Invalid creditionals")
