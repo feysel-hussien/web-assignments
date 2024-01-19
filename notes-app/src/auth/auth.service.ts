@@ -38,7 +38,7 @@ export class AuthService {
     try{
     if (user){
       // console.log(`Checking creditials for user ${user}`);
-        const payload ={id:user._id,role:user.role};
+        const payload ={id:user._id,user:user};
         // console.log(payload)
         const access_token= await this.jwtService.signAsync(payload);
 
