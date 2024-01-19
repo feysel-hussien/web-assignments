@@ -31,7 +31,6 @@ async register(@Body() createUsersDto:CreateUsersDto):Promise<User>{
         ...createUsersDto,
         password:hashedPassword,
     }
-
     return this.usersService.register(userWithHashedPassword);
 }
 

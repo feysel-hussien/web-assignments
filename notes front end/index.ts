@@ -14,12 +14,14 @@ document.getElementById('loginButton')?.addEventListener('click', async function
         if (response.ok) {
             const data = await response.json();
             const {user,access_token}=data;
-            console.log(user,access_token);
             localStorage.setItem('jwt',access_token);
             localStorage.setItem('user',JSON.stringify(user));
-            console.log(user);
-            console.log(data);
-            window.location.href = 'user/userindex.html';
+            if (user.role === 'admin'){
+                window.location.href = 'admin/adminindex.html';
+            } else {
+                window.location.href = 'user/userindex.html';
+            }
+
         } else {
             console.log('error', response.status, response.statusText);
         }
