@@ -9,7 +9,6 @@ import { AuthService } from '../auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/auth.guard';
 import {  Response} from 'express';
 import { Roles } from 'src/roles/roles.decorator';
-import { AuthorizationGuard } from 'src/auth/authorization.guard';
 import { Role } from 'src/roles/role.enum';
 import { RolesGuard } from 'src/roles/roles.guard';
 import { request } from 'http';

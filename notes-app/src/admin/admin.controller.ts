@@ -20,6 +20,7 @@ export class AdminController {
   @UseGuards(JwtAuthGuard,RolesGuard)
   @Delete('note/:id')
   deleteNote(@Param('id') id: string) {
+    console.log('delete note in');
     return this.adminService.deleteNote(id);
   }
 

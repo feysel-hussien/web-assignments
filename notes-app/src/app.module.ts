@@ -7,7 +7,7 @@ import { NotesModule } from './notes/notes.module';
 import { AdminModule } from './admin/admin.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { createMongooseOptions } from 'database.config';
-import { AuthMiddleware } from './auth/auth.middleware';
+// import { AuthMiddleware } from './auth/auth.middleware';
 
 
 @Module({

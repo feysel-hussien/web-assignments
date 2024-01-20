@@ -32,11 +32,16 @@ async function fetchAllUsersWithNotes(){
                     'Content-Type': 'application/json'
                 }
             });
-            if (!userResponse.ok){
+            if (!userResponse.ok ){
                 console.log('Error: ', userResponse.status, userResponse.statusText);
                 return;
             }
             const user = await userResponse.json();
+
+            //check if the user is an admin and skip if so
+            if (user.role === 'admin'){
+                continue;
+            }
 
 
             const notes = data[userId];
@@ -87,8 +92,10 @@ async function fetchAllUsersWithNotes(){
                 deleteNoteButton.type = 'submit';
                 deleteNoteButton.className = 'btn btn-primary mr-2 delete-note-button';
                 deleteNoteButton.textContent = 'Delete Note';
-                deleteNoteButton.dataset.noteId=note.id;
+                deleteNoteButton.dataset.noteId=note._id.toString();
+                deleteNoteButton.addEventListener('click', deleteNote);
                 noteCardBody.appendChild(deleteNoteButton);
+
 
                 noteCard.appendChild(noteCardBody);
                 userNotes.appendChild(noteCard);
@@ -108,7 +115,7 @@ async function deleteUser(event: Event) {
     event.preventDefault();
     const deleteUserButton = event.target as HTMLButtonElement;
     const userId = deleteUserButton.dataset.userId;
-        await fetch(`http://localhost:5001/admin/user/${userId}`,{
+        const response =await fetch(`http://localhost:5001/admin/user/${userId}`,{
             method:'DELETE',
             headers:{
                 'authorization': `Bearer ${token}`,
@@ -116,17 +123,50 @@ async function deleteUser(event: Event) {
 
             }
         });
+        if (response.ok){
+            alert('User Deleted Successfully');
+            //remove the user from the DOM
+            const userContainer = deleteUserButton.closest('.user.container');
+            userContainer?.remove();
+        }
+        else{
+            alert('Failed to delete user');
+            console.log('Error: ', response.status, response.statusText);
+        }
+    
 }
 
+async function deleteNote(event:Event){
+    event.preventDefault();
+    const deleteNoteButton = event.target as HTMLButtonElement;
+    const noteId = deleteNoteButton.dataset.noteId;
+    const token = localStorage.getItem('jwt');
+    console.log('noteId: ', noteId);
+    const response = await fetch(`http://localhost:5001/admin/note/${noteId}`,{
+        method:'DELETE',
+        headers:{
+            'Authorization':`Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    });
+    if (response.ok){
+        alert('Note Deleted Successfully');
+        //remove the note from the DOM
+        const noteCard = deleteNoteButton.closest('.card');
+        noteCard?.remove();
+    }
+    else{
+        alert('Failed to delete note');
+        console.log('Error: ', response.status, response.statusText);
+    }
+    }
 
 
+document.addEventListener('DOMContentLoaded', () => {
+        const admin = JSON.parse(localStorage.getItem('user') as string);
+        const adminNameElement = document.getElementById('admin_name');
+        if (adminNameElement) {
+            adminNameElement.innerHTML = `Welcome ${admin.name}`;
+        }
+    });
 
-// if (deleteNote) {
-//     deleteNoteButton.addEventListener('click', async (event) => {
-//         event.preventDefault();
-//         const deleteNoteButton = event.target as HTMLButtonElement;
-//         const noteId = deleteNoteButton.dataset.noteId;
-
-//         // Delete the note with this ID
-//     });
-// }
