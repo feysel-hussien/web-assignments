@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>admin homePage</title>
     <link rel="stylesheet" href="../styles/main.css">
-    <script src="index.js"></script>
+    <script src="../../notes-app/dist/admin/admin.js"></script>
     <style >
         body{
             background-image: url(admin\ image.png);
@@ -17,46 +17,31 @@
 
 </head>
 <body>
-    <div class="container">
-        <h1 class="my-4">User Name 1</h1>
+    <h1 class="text-center m-10" id = 'admin_name'> Welcome Admin</h1>
+    <div class="main container">
+
+
+        <!-- a single user-->
+    <div class="user container">
+        <h2 class="mt-4">userName </h2>
         <button type="delete" class="btn btn-primary">Delete User</button>
-        <div class="mynotes row">
+
+        <h4 class="mt-4">Notes</h4>
+        <div class="usernotes row">
+
+            <!-- a single note-->
             <div class="card mx-2 my-4" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Note title</h5>
-                    <p class="card-text">Note conetnt</p>
+                    <p class="card-text">Note content</p>
                     <button type="delete" class="btn btn-primary mr-2">Delete Note</button>
-                    
-
-                </div>
             </div>
-
-           
-            <div class="card mx-2 my-4" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Note title</h5>
-                    <p class="card-text">Note conetnt</p>
-                    <button type="delete" class="btn btn-primary mr-2">Delete Note</button>
-                    
-
-                </div>
-            </div> 
-            
-            <div class="card mx-2 my-4" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Note title</h5>
-                    <p class="card-text">Note conetnt</p>
-                    <button type="delete" class="btn btn-primary mr-2">Delete Note</button>
-                    
-
-                </div>
-            </div> 
+        </div>
+         <!-- a single note-->
     </div>
+    </div>
+    <!-- a single user-->
 
-            
-
-        
-                
-
+    </div>
 </body>
 </html>
