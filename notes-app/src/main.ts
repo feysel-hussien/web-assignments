@@ -3,10 +3,11 @@ import { AppModule } from './app.module';
 import * as cookieParser from 'cookie-parser';
 import { UsersService } from './users/users.service';
 import { Role } from './roles/role.enum';
+import { NestExpressApplication } from '@nestjs/platform-express'; // Import the NestExpressApplication type
 const port= 5001;
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule,{cors:true});
+  const app = await NestFactory.create<NestExpressApplication>(AppModule,{cors:true});
   // app.enableCors(options:{
   //   origin:'http://localhost:5001',
   //   Credential:true
