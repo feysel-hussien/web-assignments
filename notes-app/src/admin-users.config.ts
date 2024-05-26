@@ -1,3 +1,1 @@
-export const adminUsers=[
-
-]
+export const adminUsers = [];

@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { Role } from 'src/roles/role.enum';
 import { Roles } from 'src/roles/roles.decorator';
@@ -10,14 +19,14 @@ export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
   @Roles(Role.Admin)
-  @UseGuards(JwtAuthGuard,RolesGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Get('allwithnotes')
   getAllUsers() {
     return this.adminService.getAllUsersWithNotes();
   }
 
   @Roles(Role.Admin)
-  @UseGuards(JwtAuthGuard,RolesGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Delete('note/:id')
   deleteNote(@Param('id') id: string) {
     console.log('delete note in');
@@ -25,7 +34,7 @@ export class AdminController {
   }
 
   @Roles(Role.Admin)
-  @UseGuards(JwtAuthGuard,RolesGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Delete('user/:id')
   deleteUser(@Param('id') id: string) {
     console.log('delete user');

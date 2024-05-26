@@ -1,17 +1,19 @@
-import { IsNotEmpty } from "class-validator";
-
+import { isNotEmpty, IsNotEmpty } from 'class-validator';
+import { Types } from 'mongoose';
 
 export class CreateNotesDto {
-    @IsNotEmpty()
-    title:string;
+  @IsNotEmpty()
+  title: string;
 
-    @IsNotEmpty()
-    content:string;
+  @IsNotEmpty()
+  content: string;
 
-    @IsNotEmpty()
-    userId:string;
+  @IsNotEmpty()
+  userId: string;
 
-    // @IsNotEmpty()
-    // notesId:string;
+  @IsNotEmpty()
+  folderId:string;
 
+  // @IsNotEmpty()
+  // notesId:string;
 }

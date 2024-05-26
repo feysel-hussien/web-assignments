@@ -3,12 +3,10 @@ import { RolesService } from './roles.service';
 
 @Controller('roles')
 export class RolesController {
+  constructor(private readonly rolesService: RolesService) {}
 
-    constructor(private readonly rolesService:RolesService){}
-    
-    // @Get('userid')
-    // getUserRoles(@Param('userId') userId:string){
-    //     return this.rolesService.getUserRoles(userId);
-    // }
-    
+  // @Get('userid')
+  // getUserRoles(@Param('userId') userId:string){
+  //     return this.rolesService.getUserRoles(userId);
+  // }
 }

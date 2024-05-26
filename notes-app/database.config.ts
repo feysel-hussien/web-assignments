@@ -21,6 +21,6 @@ import { MongooseModuleOptions } from '@nestjs/mongoose';
 
 export const createMongooseOptions = (): MongooseModuleOptions => {
   return {
-    uri: 'mongodb://localhost:27017', // Replace with your actual MongoDB connection string
+    uri: 'mongodb://localhost:27017/notes_app', // Replace with your actual MongoDB connection string
   } as MongooseModuleOptions;
 };

@@ -9,13 +9,15 @@ import { User, UserSchema } from 'src/users/schemas/user.schema';
 import { AuthService } from 'src/auth/auth.service';
 
 @Module({
-  imports:[
+  imports: [
     NotesModule,
-    MongooseModule.forFeature([{ name: Note.name, schema: NoteSchema },
-      { name: User.name, schema: UserSchema },]),
+    MongooseModule.forFeature([
+      { name: Note.name, schema: NoteSchema },
+      { name: User.name, schema: UserSchema },
+    ]),
     UsersModule,
   ],
   controllers: [AdminController],
-  providers: [AdminService,AuthService],
+  providers: [AdminService, AuthService],
 })
 export class AdminModule {}
