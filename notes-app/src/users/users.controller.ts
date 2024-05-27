@@ -85,15 +85,18 @@ export class UsersController {
   async updateProfile(
     @Param('id') id: string,
     @Body() updateUserDto: UpdateUsersDto,
-  ): Promise<User> {
+  ): Promise<any> {
     return this.usersService.updateProfile(id, updateUserDto);
   }
 
-  @Roles(Role.Admin)
-  @UseGuards(JwtAuthGuard, RolesGuard)
+  // @Roles(Role.Admin)
+  //now a user can delte its account or admin can delete the account of others
+  
+  // @UseGuards(JwtAuthGuard, RolesGuard)
   @Delete('delete/:id')
-  async deleteAccount(@Param('id') id: string): Promise<User> {
-    return this.usersService.deleteAccount(id);
+  async deleteAccount(@Param('id') id: string,@Req() req): Promise<User> {
+
+    return this.usersService.deleteAccount(id,req.user);
   }
 
   //Admin route to get all users

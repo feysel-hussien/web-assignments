@@ -25,6 +25,9 @@ export class User {
   @Prop()
   role: Role;
 
+  @Prop({default:false})
+  banned:boolean
+
   _id: Types.ObjectId;
 
   @Prop()
