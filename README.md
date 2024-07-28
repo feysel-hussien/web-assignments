@@ -36,12 +36,5 @@ Our web application is a notes management platform that allows users to  create,
 **3 Go to index.html in notes front end directory which displays the login page**<br />
 
 
-# Admin Information 
-1.  **name:** betsegaw <br />
-    **email:** betsegaw@gmail.com <br />
-    **password:** betsegaw<br />
 
-2. **name:** nahom<br />
-**email:** nahom.garefo@aait.edu.et <br />
-**password:** nahomnahom <br />
 
